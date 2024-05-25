@@ -1,0 +1,248 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+import logo from '../../public/images/logo_ys_od_.svg'
+import adsBack from '../../public/images/ads_back.png'
+import { Image } from 'astro:assets';
+ import { Picture } from 'astro:assets';
+// <Header />
+
+
+const token2 = '0605213b32c1ada81d1aeb665426785c5673cb96193b687af6af64f2ee02a079e1a76153b25a9850b79ca53c5c039439f69ec0747f8a2d7d2b5ae075c4a9f0cd921fb2892c537ec18cb30eb8a194fb439c1a1a200640383260ed7491e5ae68ed1dc2521b6e5bf8b1f36ad4e86a52e3889a9c05d401e8c29321da770125754db8'
+
+const data3 = await fetch('https://strapi-ys-app-main.onrender.com/api/catalogs?pagination[start]=0&pagination[limit]=200',{
+	headers:{
+		Authorization:`Bearer ${token2}`
+	}
+})
+const data2 = await data3.json()
+
+
+
+export const prerender = false;
+
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+
+	<header
+		class="bg-black fixed w-full mx-auto z-10"
+		style={{
+			borderBottom: '1px solid #2d2d2d',
+		}}
+	>
+		<div class=" container mx-auto text-white flex items-center justify-between">
+
+			<div
+				class="py-3 mr-5"
+			>
+				<Image
+					className="max-w-[200px]"
+					src={logo}
+					alt="logo"
+					height={100}
+					width={350}
+				/>
+			</div>
+
+			<div class={` hidden xl:flex `}>
+				<a
+					href="/"
+					class="px-6 hover:bg-white hover:text-black py-5  delay-75 transition ease-out border-4  border-transparent hover:border-b-4  hover:border-b-red-600"
+				>
+					HOME
+				</a>
+				<a
+					href="/catalog"
+					class="px-6 hover:bg-white hover:text-black py-5  delay-75 transition ease-out border-4  border-transparent hover:border-b-4  hover:border-b-red-600"
+				>
+					CATALOGUE
+				</a>
+				<a
+					href="/advertisment"
+					class="px-6 hover:bg-white hover:text-black py-5  delay-75 transition ease-out border-4  border-transparent hover:border-b-4  hover:border-b-red-600"
+				>
+					ADVERTISMENT
+				</a>
+				<a
+					href="/wedding"
+					class="px-6 hover:bg-white hover:text-black py-5  delay-75 transition ease-out border-4  border-transparent hover:border-b-4  hover:border-b-red-600"
+				>
+					WEDDING
+				</a>
+				<a
+					href="/auto"
+					class="px-6 hover:bg-white hover:text-black py-5  delay-75 transition ease-out border-4  border-transparent hover:border-b-4  hover:border-b-red-600"
+				>
+					AUTO
+				</a>
+				<a
+					href="/food"
+					class="px-6 hover:bg-white hover:text-black py-5  delay-75 transition ease-out border-4  border-transparent hover:border-b-4  hover:border-b-red-600"
+				>
+					FOOD
+				</a>
+				<a
+					href="/subject"
+					class="px-6 hover:bg-white hover:text-black py-5  delay-75 transition ease-out border-4  border-transparent hover:border-b-4  hover:border-b-red-600"
+				>
+					SUBJECT
+				</a>
+				<a
+					href="/video"
+					class="px-6 hover:bg-white hover:text-black py-5  delay-75 transition ease-out border-4  border-transparent hover:border-b-4  hover:border-b-red-600"
+				>
+					VIDEO
+				</a>
+				<a
+					href="/contacts"
+					class="px-6 hover:bg-white hover:text-black py-5  delay-75 transition ease-out border-4  border-transparent hover:border-b-4  hover:border-b-red-600"
+				>
+					CONTACTS
+				</a>
+			</div>
+
+
+
+
+
+		</div>
+	</header>
+
+
+	<div style={{
+		backgroundImage: `url("${adsBack.src}")`,
+
+	}}>
+
+
+		<main class="container mx-auto pt-5">
+
+
+			<div
+				class="mx-auto"
+
+			>
+
+				<div class="pt-16 sm:py-20 container mx-auto gallery_container ">
+					<div class=" flex flex-col  ">
+						<div class=" sm:my-3 py-5 bg-white  max-w-[500px]">
+							<p
+								class={`text-center text-black notoSans text-[3rem] sm:text-[4.5rem] uppercase  `}
+							>
+								Catalogue
+							</p>
+						</div>
+
+
+
+						<div class="container grid grid-cols-2 sm:grid-cols-4 gap-3 mx-auto items-center">
+
+							{
+
+								data2.data.map((img)=>(<>
+
+									<Picture
+										class="hover:rounded-3xl hover:ease-in-out hover:tracking-tight hover:scale-125 hover:duration-75"
+
+										formats={['avif', 'webp']}
+										src={img.attributes.URL}
+										alt={img.id}
+										width="500"
+										height="500"
+									/>
+
+
+								</>))
+
+							}
+						</div>
+
+					</div>
+
+				</div>
+
+
+				<div class="sm:py-10 container mx-auto gallery_container  bg-white">
+					<div class=" flex flex-col  ">
+						<div class=" sm:my-3 py-5 bg-black  max-w-[600px] border border-2 border-black">
+							<p
+								class={`text-center text-white notoSans text-[2.3rem] sm:text-[4.5rem] uppercase  `}
+							>
+								Contact Me
+							</p>
+
+						</div>
+
+						<div class="w-full max-w-xl mx-auto">
+							<form style={{ boxShadow: '0px 2px 22px 0px rgb(0 0 0 / 15%)' }} class="bg-white px-8 pt-6 pb-8 mb-4">
+								<div class="mb-4">
+									<label class="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
+										Name
+									</label>
+									<input
+										class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+										id="name"
+										type="text"
+										placeholder="Name"
+									/>
+								</div>
+								<div class="mb-6">
+									<label class="block text-gray-700 text-sm font-bold mb-2" htmlFor="phone">
+										Phone
+									</label>
+									<input
+										class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-2 leading-tight focus:outline-none focus:shadow-outline"
+										id="phone"
+										type="phone"
+										placeholder="+380635555555"
+									/>
+								</div>
+								<div class="mb-6">
+									<label class="block text-gray-700 text-sm font-bold mb-2" htmlFor="message">
+										Message
+									</label>
+									<textarea
+										placeholder="Message"
+										class="resize-none h-36 shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+									/>
+								</div>
+								<div class="flex items-center justify-between">
+									<button
+										class="w-full bg-black hover:bg-white border-transparent border border-2 hover:border-black hover:text-black  text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+										type="button"
+									>
+										Submit
+									</button>
+								</div>
+							</form>
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+
+
+
+
+
+		</main>
+
+	</div>
+
+
+		<Footer />
+	</body>
+</html>
