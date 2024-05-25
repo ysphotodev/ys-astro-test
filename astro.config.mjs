@@ -10,9 +10,9 @@ import node from '@astrojs/node';
 export default defineConfig({
 
   output: 'server', // Set the output to server for SSR
-  // adapter: node({
-  //   mode: 'standalone' // Options can vary depending on the adapter, refer to the adapter's documentation
-  // }),
+  adapter: node({
+    mode: 'standalone' // Options can vary depending on the adapter, refer to the adapter's documentation
+  }),
 
 
 
