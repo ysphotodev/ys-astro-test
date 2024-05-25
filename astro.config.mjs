@@ -3,7 +3,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
 import tailwind from "@astrojs/tailwind";
-import vercel from '@astrojs/vercel';
+
 import node from '@astrojs/node';
 
 // https://astro.build/config
@@ -14,8 +14,7 @@ export default defineConfig({
   //   mode: 'standalone' // Options can vary depending on the adapter, refer to the adapter's documentation
   // }),
 
-  adapter: vercel(),
-  
+
 
   image:{
     service: passthroughImageService(),
